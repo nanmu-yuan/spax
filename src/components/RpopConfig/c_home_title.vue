@@ -32,16 +32,20 @@ export default {
 			rCom: [
 				{
 					components: toolCom.c_input_item,
-					configNme: 'titleConfig',
+					configNme: 'LConfigText',
+				},
+				{
+					components: toolCom.c_input_item,
+					configNme: 'RConfigText',
 				},
 				{
 					components: toolCom.c_input_item,
 					configNme: 'linkConfig',
 				},
-				// {
-				// 	components: toolCom.c_bg_color,
-				// 	configNme: 'titleColor',
-				// },
+				{
+					components: toolCom.c_color,
+					configNme: 'BgColorConfig',
+				},
 				// {
 				// 	components: toolCom.c_txt_tab,
 				// 	configNme: 'textPosition',
@@ -73,12 +77,11 @@ export default {
 					this.$store.state.admin.mobildConfig.defaultArray[nVal]
 				)
 			);
-			console.log(value,123)
+			console.log(0)
 			this.configObj = value;
 		},
 		configObj: {
 			handler(nVal, oVal) {
-				console.log(nVal)
 				this.$store.commit('admin/mobildConfig/UPDATEARR', {
 					num: this.num,
 					val: nVal,
@@ -94,6 +97,7 @@ export default {
 					this.$store.state.admin.mobildConfig.defaultArray[this.num]
 				)
 			);
+			console.log(1)
 			this.configObj = value;
 		});
 	},

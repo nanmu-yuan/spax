@@ -29,9 +29,7 @@ export default {
 	},
 	created() {
 		this.defaults = this.configObj;
-
 		this.configData = this.configObj[this.configNme];
-		console.log(this.configData);
 	},
 	watch: {
 		configObj: {

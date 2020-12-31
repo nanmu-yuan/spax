@@ -1,14 +1,28 @@
 <template>
-	<div class="Header">
-		<div class="title-box" :style="[
-            {'textAlign':txtPosition},
-            {'fontStyle':txtStyle!='bold'?txtStyle:''},
-            {'fontWeight':txtStyle=='bold'?txtStyle:''},
-            {'fontSize':fontSize+'px'},
-            {'marginTop':mTOP+'px'}
-         ]">
-			<a :href="link"><span>{{titleTxt}}</span></a>
-		</div>
+	<div class="Header" style="width:650px" :style="{marginTop:mTOP}">
+		<table border="0" cellspacing="0" cellpadding="0" width="100%" :style="{'backgroundColor':bgColor}" :bgcolor="bgColor">
+			<tbody>
+				<tr>
+					<td>
+						<table border="0" cellspacing="0" cellpadding="0" width="100%">
+							<tbody>
+								<tr>
+									<td style="padding-bottom:15px;padding-left:20px;padding-right:20px;padding-top:15px;">
+										<table border="0" cellspacing="0" cellpadding="0" width="100%">
+											<tbody>
+												<tr>
+													<td :style="[{'color':textColor},{'fontSize':fontSize},{'textAlign':txtPosition}]"><span>{{LtitleTxt}}</span> <a target="_blank" :href="link" style="color:#cc3366;font-size:13px;font-weight:normal;text-decoration:underline;"><span>{{RtitleTxt}}</span></a></td>
+												</tr>
+											</tbody>
+										</table>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 </template>
 <script>
@@ -17,7 +31,7 @@ export default {
 	name: 'Header',
 	configName: 'c_home_title',
 	cname: '头部模块',
-	icon:'el-icon-bank-card',
+	icon: 'el-icon-bank-card',
 	type: '1',
 	props: {
 		index: {
@@ -36,8 +50,13 @@ export default {
 			defaultConfig: {
 				name: 'header',
 				timestamp: this.num,
-				titleConfig: {
-					title: '标题',
+				LConfigText: {
+					title: '左边文本',
+					value: '内容',
+					max: 100,
+				},
+				RConfigText: {
+					title: '右边文本',
 					value: '内容',
 					max: 100,
 				},
@@ -46,14 +65,21 @@ export default {
 					value: '',
 					max: 100,
 				},
+				BgColorConfig: {
+					title: '背景色',
+					value: '',
+				},
 			},
-			titleTxt: '',
+			LtitleTxt: '',
+			RtitleTxt:'',
 			link: '',
 			txtPosition: '',
 			txtStyle: '',
-			fontSize: 0,
+			fontSize: 12,
+			textColor:'#000',
 			mTOP: 0,
 			pageData: {},
+			bgColor:''
 		};
 	},
 	watch: {
@@ -84,9 +110,11 @@ export default {
 	},
 	methods: {
 		setConfig(data) {
-			if(!data) return;
-			this.titleTxt = data.titleConfig.value;
+			if (!data) return;
+			this.LtitleTxt = data.LConfigText.value;
+			this.RtitleTxt = data.RConfigText.value;
 			this.link = data.linkConfig.value;
+			this.bgColor = data.BgColorConfig.value
 			// this.txtPosition =
 			// 	data.textPosition.list[data.textPosition.type].style;
 			// this.txtStyle = data.textStyle.list[data.textStyle.type].style;
@@ -105,6 +133,9 @@ export default {
 };
 </script>
 <style lang="less" scoped>
+.Header{
+	margin: 4px 0;
+}
 .title-box {
 	color: #282828;
 }

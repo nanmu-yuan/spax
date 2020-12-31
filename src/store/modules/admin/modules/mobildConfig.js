@@ -9,7 +9,6 @@ export default {
             state.defaultArray[data.num] = data.val
         },
         UPDATEARR(state, data) {
-            console.log(data)
             state.defaultArray[data.num] = data.val
             let value = Object.assign({}, state.defaultArray);
             state.defaultArray = value;
