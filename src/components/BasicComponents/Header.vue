@@ -48,7 +48,7 @@ export default {
 		return {
 			// 默认初始化数据禁止修改
 			defaultConfig: {
-				name: 'header',
+				name: 'c_home_title',
 				timestamp: this.num,
 				LConfigText: {
 					title: '左边文本',

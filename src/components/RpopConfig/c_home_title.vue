@@ -97,7 +97,6 @@ export default {
 					this.$store.state.admin.mobildConfig.defaultArray[this.num]
 				)
 			);
-			console.log(1)
 			this.configObj = value;
 		});
 	},
