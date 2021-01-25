@@ -2,7 +2,10 @@
 	<div class="box" v-if="configData">
 		<el-form ref="form" label-width="80px">
 			<el-form-item :label="configData.title">
-               <el-input v-model="configData.value" placeholder="选填不超过10个字" :maxlength="configData.max" type=""></el-input>
+				<el-select v-model="configData.value" placeholder="请选择">
+					<el-option v-for="item in configData.options" :key="item.value" :label="item.label" :value="item.value">
+					</el-option>
+				</el-select>
 			</el-form-item>
 		</el-form>
 	</div>
@@ -11,8 +14,7 @@
 
 <script>
 export default {
-	name: 'c_input_item',
-	ctype:'content',
+	name: 'c_select_item',
 	props: {
 		configObj: {
 			type: Object,

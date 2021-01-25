@@ -2,7 +2,7 @@
 	<div class="box" v-if="configData">
 		<el-form ref="form" label-width="80px">
 			<el-form-item :label="configData.title">
-               <el-input v-model="configData.value" placeholder="选填不超过10个字" :maxlength="configData.max" type=""></el-input>
+                <el-input-number v-model="configData.value" @change="handleChange" :min="0"></el-input-number>
 			</el-form-item>
 		</el-form>
 	</div>
@@ -11,8 +11,8 @@
 
 <script>
 export default {
-	name: 'c_input_item',
-	ctype:'content',
+	name: 'c_input_number',
+	ctype:'style',
 	props: {
 		configObj: {
 			type: Object,
@@ -31,7 +31,12 @@ export default {
 	created() {
 		this.defaults = this.configObj;
 		this.configData = this.configObj[this.configNme];
-	},
+    },
+    methods: {
+        handleChange(value){
+            this.configData.value = value;
+        }
+    },
 	watch: {
 		configObj: {
 			handler(nVal, oVal) {

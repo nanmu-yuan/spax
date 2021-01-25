@@ -13,6 +13,9 @@ export default {
             let value = Object.assign({}, state.defaultArray);
             state.defaultArray = value;
         },
+        DELETEARRAY (state, data) {
+             delete state.defaultArray[data.num];
+        },
         defaultArraySort(state, data) {
             let newArr = objToArr(state.defaultArray)
             let sortArr = []

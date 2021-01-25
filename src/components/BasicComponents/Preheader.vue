@@ -1,36 +1,33 @@
 <template>
-	<div class="Header" style="width:650px" :style="{marginTop:mTOP}">
-		<table border="0" cellspacing="0" cellpadding="0" width="100%" :style="{'backgroundColor':bgColor}" :bgcolor="bgColor">
-			<tbody>
-				<tr>
-					<td>
-						<table border="0" cellspacing="0" cellpadding="0" width="100%">
-							<tbody>
-								<tr>
-									<td style="padding-bottom:15px;padding-left:20px;padding-right:20px;padding-top:15px;">
-										<table border="0" cellspacing="0" cellpadding="0" width="100%">
-											<tbody>
-												<tr>
-													<td :style="[{'color':textColor},{'fontSize':fontSize},{'textAlign':txtPosition}]"><span>{{LtitleTxt}}</span> <a target="_blank" :href="link" style="color:#cc3366;font-size:13px;font-weight:normal;text-decoration:underline;"><span>{{RtitleTxt}}</span></a></td>
-												</tr>
-											</tbody>
-										</table>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+	<div class="Preheader" style="width:650px" :style="{marginTop:mTOP+'px'}">
+		<div  class="header-justify">
+			<table border="0" cellspacing="0" cellpadding="0" width="100%" :style="[{'backgroundColor':bgColor},{'backgroundImage':'url('+bgImgUrl+')'}]" :bgcolor="bgColor">
+				<tbody>
+					<tr>
+						<td style="padding-bottom:15px;padding-left:20px;padding-right:20px;padding-top:15px;">
+							<table border="0" cellspacing="0" cellpadding="0" width="100%">
+								<tbody>
+									<tr>
+										<td :style="[{'color':textColor},{'fontSize':fontSize+'px'},{'textAlign':txtPosition}]"><span>{{LtitleTxt}}</span></td>
+										<td style="text-align:right">
+											<a target="_blank" :href="link" :style="[{'color':textColor},{'fontSize':fontSize+'px'},{'fontWeight':'normal'},{'textDecoration':'underline'}]"><span>{{RtitleTxt}}</span></a>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
 </template>
 <script>
 import { mapState } from 'vuex';
 export default {
-	name: 'Header',
+	name: 'Preheader',
 	configName: 'c_home_title',
-	cname: '头部模块',
+	cname: 'Preheader',
 	icon: 'el-icon-bank-card',
 	type: '1',
 	props: {
@@ -40,6 +37,9 @@ export default {
 		num: {
 			type: null,
 		},
+		styleType:{
+			type:String
+		}
 	},
 	computed: {
 		...mapState('admin/mobildConfig', ['defaultArray']),
@@ -52,12 +52,12 @@ export default {
 				timestamp: this.num,
 				LConfigText: {
 					title: '左边文本',
-					value: '内容',
+					value: 'If you cannot see images, please',
 					max: 100,
 				},
 				RConfigText: {
 					title: '右边文本',
-					value: '内容',
+					value: 'If you cannot see images, please',
 					max: 100,
 				},
 				linkConfig: {
@@ -67,19 +67,36 @@ export default {
 				},
 				BgColorConfig: {
 					title: '背景色',
-					value: '',
+					value: '#ffffff',
 				},
+				fontColorConfig: {
+					title: '字体样色',
+					value: '#000000',
+				},
+				positionConfig: {
+					title: '顶部距离',
+					value: 0,
+				},
+				fontSizeConfig: {
+					title: '字体大小',
+					value: 12,
+				},
+				BgImgConfig:{
+					title:'背景图',
+					value:''
+				}
 			},
 			LtitleTxt: '',
-			RtitleTxt:'',
+			RtitleTxt: '',
 			link: '',
 			txtPosition: '',
 			txtStyle: '',
-			fontSize: 12,
-			textColor:'#000',
+			fontSize: '',
+			textColor: '#000000',
 			mTOP: 0,
 			pageData: {},
-			bgColor:''
+			bgColor: '',
+			bgImgUrl:''
 		};
 	},
 	watch: {
@@ -114,12 +131,14 @@ export default {
 			this.LtitleTxt = data.LConfigText.value;
 			this.RtitleTxt = data.RConfigText.value;
 			this.link = data.linkConfig.value;
-			this.bgColor = data.BgColorConfig.value
+			this.bgColor = data.BgColorConfig.value;
+			this.textColor = data.fontColorConfig.value;
 			// this.txtPosition =
 			// 	data.textPosition.list[data.textPosition.type].style;
 			// this.txtStyle = data.textStyle.list[data.textStyle.type].style;
-			// this.fontSize = data.fontSize.val;
-			// this.mTOP = data.mbConfig.val;
+			this.fontSize = data.fontSizeConfig.value;
+			this.mTOP = data.positionConfig.value;
+			this.bgImgUrl = data.BgImgConfig.value;
 		},
 	},
 	mounted() {
@@ -133,9 +152,6 @@ export default {
 };
 </script>
 <style lang="less" scoped>
-.Header{
-	margin: 4px 0;
-}
 .title-box {
 	color: #282828;
 }

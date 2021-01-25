@@ -6,15 +6,17 @@
 					<div class="l-menu-container">
 						<div class="Lmenu">
 							<div class="warp">
-								<div>组件库</div>
+								<div style="padding:10px;text-align:center">组件库</div>
 								<div v-for="(item,index) of Lmenu" :key="index">
-									<div>{{item.title}}</div>
 									<draggable :list="item.list" class="dragArea list-group" chosenClass="chosen" :options="{group:{name: 'people',pull:'clone', put: false},sort: false}" :clone="cloneDog" @change="log">
 										<div class="list-group-item " v-for="(element,index) of item.list" :key='index' @click="addDom(element,index)">
 											<span class="icon" :class="element.icon"></span>
 											{{element.name}}
 										</div>
 									</draggable>
+								</div>
+								<div>
+									<el-button type="primary" @click="saveConfig"><span>保存</span></el-button>
 								</div>
 							</div>
 						</div>
@@ -23,16 +25,16 @@
 			</el-col>
 			<el-col :span="12">
 				<div class="grid-content bg-purple-light">
-					<div style="width:100%;padding:2px">
+					<div class="mid-warp">
 						<table width="650px" border="0" cellpadding="0" cellspacing="0" align="center" style="width: 650px; margin: 0px auto;">
 							<tbody>
 								<tr>
-									<td>
+									<td bgcolor = "#fff" style="background:#fff">
 										<div class="Mpage">
 											<draggable class="drag-Mpage" group="people" :list="mConfig" @change="log" ghostClass="ghost">
 												<div class="mConfig-item" v-for="(item,key) in mConfig" :key="key" @click="bingConfig(item,key)">
 													<div class="content-block-template">
-														<component :is="item.name" ref="getComponentData" :configData="propsObj" :index="key" :num="item.num"></component>
+														<component :is="item.name" ref="getComponentData" :configData="propsObj" :index="key" :styleType="styleType" :num="item.num"></component>
 													</div>
 													<div class="content-block-overlay">
 														<div class="overlay-background"></div>
@@ -40,14 +42,14 @@
 															<div class="overlay-edited-background"></div>
 														</div>
 														<div class="overlay-actions">
-															<div class="edit-overlay clickable" ></div>
-															<!-- <div class="change-variant prev-variant" title="Previous type"  @click.stop="bindDelete(item,key)"><i class="icon el-icon-arrow-left"></i></div> -->
+															<div class="edit-overlay clickable"></div>
+															<!-- <div class="change-variant prev-variant" title="Previous type" @click.stop="Previous(item,key)"><i class="icon el-icon-arrow-left"></i></div> -->
 															<div class="overlay-actions-middle">
 																<div class="overlay-actions-middle-wrapper clearfix">
 																	<div class="action-handle remove-handle" title="Remove" @click.stop="bindDelete(item,key)"><i class="icon el-icon-delete"></i></div>
 																</div>
 															</div>
-															<!-- <div class="change-variant next-variant" title="Next type"><i class="icon el-icon-arrow-right"></i></div> -->
+															<!-- <div class="change-variant next-variant" title="Next type" @click.stop="Next(item,key)"><i class="icon el-icon-arrow-right"></i></div> -->
 														</div>
 													</div>
 												</div>
@@ -66,7 +68,7 @@
 						<div class="right-box">
 							<div v-for="(item,key) in rConfig" :key="key">
 								<div class="title-bar">{{item.cname}}</div>
-								<component :is="item.configName" :activeIndex="activeIndex" :num="item.num" :index="key"></component>
+								<component :is="item.configName" :activeIndex="activeIndex" :num="item.num"  :index="key"></component>
 							</div>
 						</div>
 					</div>
@@ -89,7 +91,9 @@ export default {
 			mConfig: [], // 中间组件渲染
 			rConfig: [], // 右侧组件配置
 			propsObj: {},
-			activeIndex: -99, // 选中的下标
+			activeIndex: -99, // 选中的下标,
+			styleType: 'justify',
+			num: 0,
 		};
 	},
 	components: {
@@ -161,12 +165,11 @@ export default {
 			item.num = `${timestamp}`;
 			//this.activeConfigName = item.name
 			let tempItem = JSON.parse(JSON.stringify(item));
-			console.log(this.$store);
 			this.rConfig = [];
 			this.mConfig.push(tempItem);
 			this.rConfig.push(tempItem);
 			this.activeIndex = this.mConfig.length - 1;
-			 this.$store.commit('admin/mobildConfig/SETCONFIGNAME', item.name)
+			this.$store.commit('admin/mobildConfig/SETCONFIGNAME', item.name);
 			this.$store.commit('admin/mobildConfig/ADDARRAY', {
 				num: item.num,
 				val: item.data().defaultConfig,
@@ -179,18 +182,78 @@ export default {
 			this.activeIndex = index;
 		},
 		bindDelete(item, index) {
-			console.log(item)
+			console.log(item);
 			this.mConfig.splice(index, 1);
 			this.rConfig.splice(0, 1);
+			this.$store.commit('admin/mobildConfig/DELETEARRAY', item);
 		},
 		bindMove(item, index) {},
+		saveConfig() {
+			let val = this.$store.state.admin.mobildConfig.defaultArray;
+			console.log(JSON.stringify(val), '44444444');
+			this.$message.success('保存成功');
+			// diySave(this.pageId, {
+			// 	name: this.pageName,
+			// 	type: this.pageType,
+			// 	value: val,
+			// }).then((res) => {
+			// 	this.$Message.success('保存成功');
+			// });
+		},
+		// 获取默认配置
+		getDefaultConfig() {
+			this.$axios.get('/api/test').then(({ data }) => {
+				let obj = {};
+				let tempARR = [];
+				let newArr = this.objToArry(data);
+				newArr.map((el, index) => {
+					this.lconfig.map((item, j) => {
+						if (el.name == item.configName) {
+							item.num = el.timestamp;
+							let tempItem = JSON.parse(JSON.stringify(item));
+							tempARR.push(tempItem);
+							obj[el.timestamp] = el;
+							this.mConfig.push(tempItem);
+							// 保存默认组件配置
+							this.$store.commit('admin/mobildConfig/ADDARRAY', {
+								num: el.timestamp,
+								val: el,
+							});
+						}
+					});
+				});
+			});
+		},
+		Previous(item, index) {
+			console.log(item, this.mConfig, this.rConfig);
+		},
+		Next(item, index) {
+			console.log(item);
+			// this.num++;
+			// if(this.num>1){
+			// 	this.num = 0;
+			// }
+			// const loop = ['justify','center'];
+			// this.styleType = loop[this.num];
+		},
+	},
+	mounted() {
+		this.getDefaultConfig();
 	},
 };
 </script>
 <style lang="less" scoped>
+.mid-warp{
+	width: 100%;
+	height: 100vh;
+	background-color:#f2f2f2;
+	overflow-y: scroll;
+	
+}
 .dragArea.list-group {
 	display: flex;
 	flex-wrap: wrap;
+	min-height: 600px;
 
 	.list-group-item {
 		display: flex;
@@ -205,71 +268,19 @@ export default {
 		font-size: 12px;
 		color: #666;
 		cursor: pointer;
-
-		&:nth-child(3n) {
-			margin-right: 0;
-		}
 	}
+	.list-group-item:hover{
+			box-shadow:2px 2px 5px #000;
+		}
 }
 .icon {
 	font-size: 24px;
 }
 .mConfig-item {
 	position: relative;
-	// .edit-box {
-	// 	display: none;
-	// 	position: absolute;
-	// 	left: 0;
-	// 	top: 0;
-	// 	width: 100%;
-	// 	height: 100%;
-	// 	background:red;
-	// 	border: 2px solid red;
-	// 	opacity: 0.2;
-	// 	z-index: 10;
-	// 	top: -2px;
-	//     left: -2px;
-	// 	.del {
-	// 		position: absolute;
-	// 		right: 0;
-	// 		bottom: 0;
-	// 		width: 32px;
-	// 		height: 16px;
-	// 		line-height: 16px;
-	// 		display: inline-block;
-	// 		text-align: center;
-	// 		font-size: 10px;
-	// 		color: #fff;
-	// 		background: red;
-	// 		margin-left: 2px;
-	// 		cursor: pointer;
-	// 		z-index: 11;
-	// 	}
-	// 	.move{
-	// 		position: absolute;
-	// 		right: 50px;
-	// 		bottom: 0;
-	// 		width: 32px;
-	// 		height: 16px;
-	// 		line-height: 16px;
-	// 		display: inline-block;
-	// 		text-align: center;
-	// 		font-size: 10px;
-	// 		color: #fff;
-	// 		background: red;
-	// 		margin-left: 2px;
-	// 		cursor: pointer;
-	// 		z-index: 11;
-	// 	}
-	// }
-	// &:hover {
-	// 	cursor: move;
-	// 	.edit-box {
-	// 		display: block;
-	// 	}
 }
 .content-block-overlay {
-	.show{
+	.show {
 		display: block;
 	}
 	position: absolute;
@@ -288,7 +299,7 @@ export default {
 		.overlay-background {
 			display: block;
 		}
-		.overlay-actions{
+		.overlay-actions {
 			display: block;
 		}
 	}
@@ -298,6 +309,7 @@ export default {
 		height: 100%;
 		border: 2px dashed #4db159;
 		display: block;
+		box-sizing: border-box;
 		.overlay-edited-background {
 			background: #fff;
 			opacity: 0;
@@ -373,20 +385,22 @@ export default {
 }
 .r-pop-container {
 	width: 100%;
-}
-.right-box {
-	width: 400px;
-	border: 1px solid #ddd;
-	border-radius: 4px;
-	min-height: 500px;
+	height: 100vh;
 
-	.title-bar {
-		height: 38px;
-		line-height: 38px;
-		text-align: center;
-		color: #333;
+	.right-box {
+		border: 1px solid #ddd;
 		border-radius: 4px;
-		border-bottom: 1px solid #eee;
+		height: 100%;
+		padding: 0 20px;
+
+		.title-bar {
+			height: 38px;
+			line-height: 38px;
+			text-align: center;
+			color: #333;
+			border-radius: 4px;
+			border-bottom: 1px solid #eee;
+		}
 	}
 }
 .chosen {
@@ -398,6 +412,7 @@ export default {
 	background: #04ff00;
 	width: 100%;
 	border: 2px dashed #4db159;
+	box-sizing: border-box;
 }
 .clearfix::after {
 	clear: both;

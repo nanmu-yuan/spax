@@ -21,8 +21,8 @@
 import toolCom from '../ItemConfig';
 import { mapState, mapMutations, mapActions } from 'vuex';
 export default {
-	name: 'c_home_bargain',
-	componentsName: 'home_bargain',
+	name: 'c_cusbutton',
+	componentsName: 'c_cusbutton',
 	components: {
 		...toolCom,
 	},
@@ -38,17 +38,13 @@ export default {
 		},
 	},
 	data() {
-		return {
+			return {
 			activeName:'first',
 			configObj: {},
 			rComContent: [
 				{
-					components: toolCom.c_input_item,
-					configNme: 'LConfigText',
-				},
-				{
-					components: toolCom.c_input_item,
-					configNme: 'RConfigText',
+					components: toolCom.c_upload,
+					configNme: 'LConfigImg',
 				},
 				{
 					components: toolCom.c_input_item,
@@ -56,26 +52,18 @@ export default {
 				},
 			],
 			rComStyle: [
-				{
+                 {
 					components: toolCom.c_color,
 					configNme: 'BgColorConfig',
 				},
 				{
-					components: toolCom.c_upload,
-					configNme: 'BgImgConfig',
-				},
-				{
-					components: toolCom.c_color,
-					configNme: 'fontColorConfig',
-				},
-				{
-					components: toolCom.c_input_number,
+					components: toolCom.c_common_input_number,
 					configNme: 'positionConfig',
 				},
 				{
-					components: toolCom.c_input_number,
-					configNme: 'fontSizeConfig',
-				},
+					components: toolCom.c_select_item,
+					configNme: 'imgShowConfig',
+                },
 			],
 		};
 	},

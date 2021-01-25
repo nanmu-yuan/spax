@@ -43,12 +43,8 @@ export default {
 			configObj: {},
 			rComContent: [
 				{
-					components: toolCom.c_input_item,
-					configNme: 'LConfigText',
-				},
-				{
-					components: toolCom.c_input_item,
-					configNme: 'RConfigText',
+					components: toolCom.c_upload,
+					configNme: 'LConfigImg',
 				},
 				{
 					components: toolCom.c_input_item,
@@ -57,24 +53,12 @@ export default {
 			],
 			rComStyle: [
 				{
-					components: toolCom.c_color,
-					configNme: 'BgColorConfig',
-				},
-				{
-					components: toolCom.c_upload,
-					configNme: 'BgImgConfig',
-				},
-				{
-					components: toolCom.c_color,
-					configNme: 'fontColorConfig',
-				},
-				{
 					components: toolCom.c_input_number,
 					configNme: 'positionConfig',
 				},
 				{
-					components: toolCom.c_input_number,
-					configNme: 'fontSizeConfig',
+					components: toolCom.c_select_item,
+					configNme: 'imgShowConfig',
 				},
 			],
 		};

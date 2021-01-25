@@ -1,23 +1,17 @@
 <template>
-	<div class="c_color" v-if="configData">
+	<div class="box" v-if="configData">
 		<el-form ref="form" label-width="80px">
 			<el-form-item :label="configData.title">
-				<el-color-picker v-model="configData.value"></el-color-picker>
+               <el-slider v-model="configData.value" ></el-slider>
 			</el-form-item>
 		</el-form>
 	</div>
+
 </template>
+
 <script>
 export default {
-	name: 'c_color',
-	data() {
-		return {
-			value: '',
-			defaults: {},
-			configData: {},
-			color2: '',
-		};
-	},
+	name: 'c_position',
 	props: {
 		configObj: {
 			type: Object,
@@ -25,6 +19,17 @@ export default {
 		configNme: {
 			type: String,
 		},
+	},
+	data() {
+		return {
+			value: '',
+			defaults: {},
+			configData: {},
+		};
+	},
+	created() {
+		this.defaults = this.configObj;
+		this.configData = this.configObj[this.configNme];
 	},
 	watch: {
 		configObj: {
@@ -36,13 +41,11 @@ export default {
 			deep: true,
 		},
 	},
-	created() {
-		this.defaults = this.configObj;
-		this.configData = this.configObj[this.configNme];
-	},
 };
 </script>
-<style lang="less" scoped>
-.bg_color {
+
+<style scoped lang="less">
+.c_row-item {
+	margin-bottom: 13px;
 }
 </style>
