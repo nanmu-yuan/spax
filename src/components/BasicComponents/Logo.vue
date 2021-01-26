@@ -82,7 +82,7 @@ export default {
 	data() {
 		return {
 			defaultConfig: {
-				name: 'c_home_title',
+				name: 'c_logo',
 				timestamp: this.num,
 				LConfigImg: {
 					title: '图片',
