@@ -19,7 +19,7 @@ export default {
 		configObj: {
 			type: Object,
 		},
-		configNme: {
+		configName: {
 			type: String,
 		},
 	},
@@ -32,13 +32,13 @@ export default {
 	},
 	created() {
 		this.defaults = this.configObj;
-		this.configData = this.configObj[this.configNme];
+		this.configData = this.configObj[this.configName];
 	},
 	watch: {
 		configObj: {
 			handler(nVal, oVal) {
 				this.defaults = nVal;
-				this.configData = nVal[this.configNme];
+				this.configData = nVal[this.configName];
 			},
 			immediate: true,
 			deep: true,

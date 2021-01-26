@@ -254,6 +254,7 @@ export default {
 	display: flex;
 	flex-wrap: wrap;
 	min-height: 600px;
+	padding:10px 30px;
 
 	.list-group-item {
 		display: flex;

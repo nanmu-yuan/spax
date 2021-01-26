@@ -3,13 +3,13 @@
 		<el-tabs type="card" v-model="activeName">
 			<el-tab-pane label="内容" name="first">
 				<div v-for="(item,key) in rComContent" :key="key">
-					<component :is="item.components.name" :configObj="configObj" ref="childData" :configNme="item.configNme" :key="key" @getConfig="getConfig" :index="activeIndex" :num="item.num"></component>
+					<component :is="item.components.name" :configObj="configObj" ref="childData" :configName="item.configName" :key="key" @getConfig="getConfig" :index="activeIndex" :num="item.num"></component>
 					<el-divider></el-divider>
 				</div>
 			</el-tab-pane>
 			<el-tab-pane label="样式" name="second">
 				<div v-for="(item,key) in rComStyle" :key="key">
-					<component :is="item.components.name" :configObj="configObj" ref="childData" :configNme="item.configNme" :key="key" @getConfig="getConfig" :index="activeIndex" :num="item.num"></component>
+					<component :is="item.components.name" :configObj="configObj" ref="childData" :configName="item.configName" :key="key" @getConfig="getConfig" :index="activeIndex" :num="item.num"></component>
 					<el-divider></el-divider>
 				</div>
 			</el-tab-pane>
@@ -44,37 +44,37 @@ export default {
 			rComContent: [
 				{
 					components: toolCom.c_input_item,
-					configNme: 'LConfigText',
+					configName: 'LConfigText',
 				},
 				{
 					components: toolCom.c_input_item,
-					configNme: 'RConfigText',
+					configName: 'RConfigText',
 				},
 				{
 					components: toolCom.c_input_item,
-					configNme: 'linkConfig',
+					configName: 'linkConfig',
 				},
 			],
 			rComStyle: [
 				{
 					components: toolCom.c_color,
-					configNme: 'BgColorConfig',
+					configName: 'BgColorConfig',
 				},
 				{
 					components: toolCom.c_upload,
-					configNme: 'BgImgConfig',
+					configName: 'BgImgConfig',
 				},
 				{
 					components: toolCom.c_color,
-					configNme: 'fontColorConfig',
+					configName: 'fontColorConfig',
 				},
 				{
 					components: toolCom.c_input_number,
-					configNme: 'positionConfig',
+					configName: 'positionConfig',
 				},
 				{
 					components: toolCom.c_input_number,
-					configNme: 'fontSizeConfig',
+					configName: 'fontSizeConfig',
 				},
 			],
 		};

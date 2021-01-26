@@ -22,7 +22,7 @@ export default {
 		configObj: {
 			type: Object,
 		},
-		configNme: {
+		configName: {
 			type: String,
 		},
 	},
@@ -30,7 +30,7 @@ export default {
 		configObj: {
 			handler(nVal, oVal) {
 				this.defaults = nVal;
-				this.configData = nVal[this.configNme];
+				this.configData = nVal[this.configName];
 			},
 			immediate: true,
 			deep: true,
@@ -38,11 +38,11 @@ export default {
 	},
 	created() {
 		this.defaults = this.configObj;
-		this.configData = this.configObj[this.configNme];
+		console.log(this.configObj[this.configName])
+		this.configData = this.configObj[this.configName];
 	},
 };
 </script>
 <style lang="less" scoped>
-.bg_color {
-}
+
 </style>

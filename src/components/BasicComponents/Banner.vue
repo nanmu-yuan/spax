@@ -78,7 +78,7 @@ export default {
 	data() {
 		return {
 			defaultConfig: {
-				name: 'c_home_title',
+				name: 'c_banner',
 				timestamp: this.num,
 				LConfigImg: {
 					title: '图片',
@@ -105,7 +105,7 @@ export default {
 							label: 'original size',
 						}
 					],
-					value:'1'
+					value:'2'
 				},
 			},
 			imgUrl: '',
