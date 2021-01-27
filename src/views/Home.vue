@@ -192,6 +192,7 @@ export default {
 		},
 		bindMove(item, index) {},
 		saveItem(item,index){
+			// 版本 - 1
 			const data = this.Lmenu[0].list.find(ele =>{
 				if(ele.name == item.name){
 					return ele
