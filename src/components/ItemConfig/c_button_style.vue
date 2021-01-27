@@ -3,7 +3,7 @@
 		<el-form ref="form" label-width="80px">
 			<el-form-item :label="configData.title">
 				<el-popover placement="left" width="280" trigger="click">
-					<el-form label-width="100px">
+					<el-form label-width="105px">
 						<el-form-item :label="configData.textColor.title">
 							<el-color-picker v-model="configData.textColor.value" size="small"></el-color-picker>
 						</el-form-item>
@@ -16,18 +16,21 @@
 								</el-option>
 							</el-select>
 						</el-form-item>
-                        <el-form-item :label="configData.borderColor.title">
-							<el-color-picker v-model="configData.borderColor.value" size="small"></el-color-picker>
-						</el-form-item>
-                        <el-form-item :label="configData.borderWidth.title">
-							<el-input-number v-model="configData.borderWidth.value" :min="1" :max="36" :step="1"></el-input-number>
-						</el-form-item>
-
-                        <el-form-item :label="configData.borderStyle.title">
+						<el-form-item :label="configData.borderStyle.title">
 							<el-select v-model="configData.borderStyle.value" placeholder="请选择">
 								<el-option v-for="item in configData.borderStyle.options" :key="item.value" :label="item.label" :value="item.value">
 								</el-option>
 							</el-select>
+						</el-form-item>
+						<el-form-item :label="configData.borderColor.title">
+							<el-color-picker v-model="configData.borderColor.value" size="small"></el-color-picker>
+						</el-form-item>
+						<el-form-item :label="configData.borderWidth.title">
+							<el-input-number v-model="configData.borderWidth.value" :min="1" :max="36" :step="1"></el-input-number>
+						</el-form-item>
+
+						<el-form-item :label="configData.borderRadius.title">
+							<el-input-number v-model="configData.borderRadius.value" :min="0" :step="1"></el-input-number>
 						</el-form-item>
 					</el-form>
 					<div class="button-style-box" slot="reference" style="[{background:}]"></div>

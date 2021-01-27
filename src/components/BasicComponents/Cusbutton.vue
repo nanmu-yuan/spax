@@ -14,7 +14,7 @@
 													<table border="0" cellpadding="0" cellspacing="0" width="" align="center" style="margin: 0 auto; border-collapse: separate !important;">
 														<tbody>
 															<tr>
-																<td class="webfont-fallback-1" :style="[{borderRadius:'0px'},{fontFamily:'Arial, sans-serif'},{fontWeight:fontWeight},{paddingBottom:'7px'},{paddingLeft:'20px'},{paddingRight:'20px'},{paddingTop:'7px'},{textAlign:'center'},{verticalAlign:'middle'},{borderColor:borderColor},{borderWidth:borderWidth+'px'},{borderStyle:borderStyle}]">
+																<td class="webfont-fallback-1" :style="[{borderRadius:borderRadius+'px'},{fontFamily:'Arial, sans-serif'},{fontWeight:fontWeight},{paddingBottom:'7px'},{paddingLeft:'20px'},{paddingRight:'20px'},{paddingTop:'7px'},{textAlign:'center'},{verticalAlign:'middle'},{borderColor:borderColor},{borderWidth:borderWidth+'px'},{borderStyle:borderStyle}]">
 																	<div style="line-height: 17px; text-align: center;">
 																		<a class="webfont-fallback-1" target="_blank" :style="[{lineHeight: '17px'},
 																		{fontFamily:'Arial, sans-serif'},{fontSize:fontSize+'px'},{color:textColor},{textAlign:'center'},{textDecoration:'none'}]" :href="item.link.value"><span style="line-height: 17px;">{{item.text.value}}</span></a>
@@ -87,11 +87,11 @@ export default {
 					},
 					{
 						title: 'TOP PADDING',
-						value: 0,
+						value: 10,
 					},
 					{
 						title: 'BOTTOM PADDING',
-						value: 0,
+						value: 10,
 					},
 				],
 				BgColorConfig: {
@@ -135,7 +135,7 @@ export default {
 						value: '',
 					},
 					borderStyle: {
-						title: 'font style',
+						title: 'border style',
 						value: 'None',
 						options: [
 							{
@@ -156,6 +156,10 @@ export default {
 							},
 						],
 					},
+					borderRadius:{
+						title: 'border radius',
+						value: 0,
+					}
 				},
 			},
 			buttonList: [],
@@ -172,7 +176,8 @@ export default {
 			fontWeight:'',
 			borderColor:'',
 			borderWidth:'',
-			borderStyle:''
+			borderStyle:'',
+			borderRadius:'',
 		};
 	},
 	watch: {
@@ -217,6 +222,7 @@ export default {
 			this.borderColor =  data.fontConfig.borderColor.value;
 			this.borderWidth =  data.fontConfig.borderWidth.value;
 			this.borderStyle =  data.fontConfig.borderStyle.value;
+			this.borderRadius = data.fontConfig.borderRadius.value;
 			// this.textColor = data.fontConfig.value;
 		},
 	},

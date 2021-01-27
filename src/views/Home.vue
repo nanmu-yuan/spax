@@ -29,7 +29,7 @@
 						<table width="650px" border="0" cellpadding="0" cellspacing="0" align="center" style="width: 650px; margin: 0px auto;">
 							<tbody>
 								<tr>
-									<td bgcolor = "#fff" style="background:#fff">
+									<td bgcolor="#fff" style="background:#fff">
 										<div class="Mpage">
 											<draggable class="drag-Mpage" group="people" :list="mConfig" @change="log" ghostClass="ghost">
 												<div class="mConfig-item" v-for="(item,key) in mConfig" :key="key" @click="bingConfig(item,key)">
@@ -46,6 +46,7 @@
 															<!-- <div class="change-variant prev-variant" title="Previous type" @click.stop="Previous(item,key)"><i class="icon el-icon-arrow-left"></i></div> -->
 															<div class="overlay-actions-middle">
 																<div class="overlay-actions-middle-wrapper clearfix">
+																	<div class="action-handle remove-handle" title="Remove" @click.stop="saveItem(item,key)"><i class="icon el-icon-copy-document"></i></div>
 																	<div class="action-handle remove-handle" title="Remove" @click.stop="bindDelete(item,key)"><i class="icon el-icon-delete"></i></div>
 																</div>
 															</div>
@@ -68,7 +69,7 @@
 						<div class="right-box">
 							<div v-for="(item,key) in rConfig" :key="key">
 								<div class="title-bar">{{item.cname}}</div>
-								<component :is="item.configName" :activeIndex="activeIndex" :num="item.num"  :index="key"></component>
+								<component :is="item.configName" :activeIndex="activeIndex" :num="item.num" :index="key"></component>
 							</div>
 						</div>
 					</div>
@@ -81,6 +82,7 @@
 import vuedraggable from 'vuedraggable';
 import MenuConfig from '../components/BasicComponents';
 import RpopConfig from '../components/RpopConfig';
+import Vue from 'vue';
 
 export default {
 	name: 'Home',
@@ -124,6 +126,7 @@ export default {
 			});
 			temp.push(basic);
 			this.Lmenu = temp;
+			console.log(this.Lmenu,1)
 		},
 		cloneDog(data) {
 			return {
@@ -188,9 +191,24 @@ export default {
 			this.$store.commit('admin/mobildConfig/DELETEARRAY', item);
 		},
 		bindMove(item, index) {},
+		saveItem(item,index){
+			const data = this.Lmenu[0].list.find(ele =>{
+				if(ele.name == item.name){
+					return ele
+				}
+			})
+			console.log(data)
+			let timestamp = new Date().getTime() * 1000;
+			let tempItem = JSON.parse(JSON.stringify(data));
+			tempItem.num = `${timestamp}`;
+			console.log(tempItem.data());
+			//console.log(this.$store.state.admin.mobildConfig.defaultArray[item.num]);
+			//console.log(this.$store.state.admin.mobildConfig.defaultArray[item.num])
+		},
 		saveConfig() {
 			let val = this.$store.state.admin.mobildConfig.defaultArray;
 			console.log(JSON.stringify(val), '44444444');
+			window.localStorage.setItem('template', JSON.stringify(val));
 			this.$message.success('保存成功');
 			// diySave(this.pageId, {
 			// 	name: this.pageName,
@@ -202,27 +220,47 @@ export default {
 		},
 		// 获取默认配置
 		getDefaultConfig() {
-			this.$axios.get('/api/test').then(({ data }) => {
-				let obj = {};
-				let tempARR = [];
-				let newArr = this.objToArry(data);
-				newArr.map((el, index) => {
-					this.lconfig.map((item, j) => {
-						if (el.name == item.configName) {
-							item.num = el.timestamp;
-							let tempItem = JSON.parse(JSON.stringify(item));
-							tempARR.push(tempItem);
-							obj[el.timestamp] = el;
-							this.mConfig.push(tempItem);
-							// 保存默认组件配置
-							this.$store.commit('admin/mobildConfig/ADDARRAY', {
-								num: el.timestamp,
-								val: el,
-							});
-						}
-					});
+			const data =JSON.parse(window.localStorage.getItem('template'));
+			let obj = {};
+			let tempARR = [];
+			let newArr = this.objToArry(data);
+			newArr.map((el, index) => {
+				this.lconfig.map((item, j) => {
+					if (el.name == item.configName) {
+						item.num = el.timestamp;
+						let tempItem = JSON.parse(JSON.stringify(item));
+						tempARR.push(tempItem);
+						obj[el.timestamp] = el;
+						this.mConfig.push(tempItem);
+						// 保存默认组件配置
+						this.$store.commit('admin/mobildConfig/ADDARRAY', {
+							num: el.timestamp,
+							val: el,
+						});
+					}
 				});
 			});
+			// this.$axios.get('/api/test').then(({ data }) => {
+			// 	let obj = {};
+			// 	let tempARR = [];
+			// 	let newArr = this.objToArry(data);
+			// 	newArr.map((el, index) => {
+			// 		this.lconfig.map((item, j) => {
+			// 			if (el.name == item.configName) {
+			// 				item.num = el.timestamp;
+			// 				let tempItem = JSON.parse(JSON.stringify(item));
+			// 				tempARR.push(tempItem);
+			// 				obj[el.timestamp] = el;
+			// 				this.mConfig.push(tempItem);
+			// 				// 保存默认组件配置
+			// 				this.$store.commit('admin/mobildConfig/ADDARRAY', {
+			// 					num: el.timestamp,
+			// 					val: el,
+			// 				});
+			// 			}
+			// 		});
+			// 	});
+			// });
 		},
 		Previous(item, index) {
 			console.log(item, this.mConfig, this.rConfig);
@@ -243,18 +281,18 @@ export default {
 };
 </script>
 <style lang="less" scoped>
-.mid-warp{
+.mid-warp {
 	width: 100%;
 	height: 100vh;
-	background-color:#f2f2f2;
+	background-color: #f2f2f2;
 	overflow-y: scroll;
-	
 }
 .dragArea.list-group {
 	display: flex;
 	flex-wrap: wrap;
 	min-height: 600px;
-	padding:10px 30px;
+	align-content: flex-start;
+	padding: 10px 30px;
 
 	.list-group-item {
 		display: flex;
@@ -263,16 +301,18 @@ export default {
 		justify-content: center;
 		width: 74px;
 		height: 66px;
+		border-radius: 10px;
 		margin-right: 10px;
 		margin-bottom: 10px;
 		background: #f7f7f7;
 		font-size: 12px;
 		color: #666;
 		cursor: pointer;
+		box-shadow: 2px 2px 5px #000;
 	}
-	.list-group-item:hover{
-			box-shadow:2px 2px 5px #000;
-		}
+	.list-group-item:hover {
+		box-shadow: none;
+	}
 }
 .icon {
 	font-size: 24px;
