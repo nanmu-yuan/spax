@@ -192,6 +192,10 @@ export default {
 		},
 		bindMove(item, index) {},
 		saveItem(item,index){
+			/**
+			 * 
+			 * 此处功能待定！！！
+			 */
 			const data = this.Lmenu[0].list.find(ele =>{
 				if(ele.name == item.name){
 					return ele
