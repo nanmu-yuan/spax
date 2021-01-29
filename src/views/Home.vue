@@ -46,7 +46,6 @@
 															<!-- <div class="change-variant prev-variant" title="Previous type" @click.stop="Previous(item,key)"><i class="icon el-icon-arrow-left"></i></div> -->
 															<div class="overlay-actions-middle">
 																<div class="overlay-actions-middle-wrapper clearfix">
-																	<div class="action-handle remove-handle" title="Remove" @click.stop="saveItem(item,key)"><i class="icon el-icon-copy-document"></i></div>
 																	<div class="action-handle remove-handle" title="Remove" @click.stop="bindDelete(item,key)"><i class="icon el-icon-delete"></i></div>
 																</div>
 															</div>
@@ -126,7 +125,6 @@ export default {
 			});
 			temp.push(basic);
 			this.Lmenu = temp;
-			console.log(this.Lmenu,1)
 		},
 		cloneDog(data) {
 			return {
@@ -191,21 +189,6 @@ export default {
 			this.$store.commit('admin/mobildConfig/DELETEARRAY', item);
 		},
 		bindMove(item, index) {},
-		saveItem(item,index){
-			// 版本 - 1
-			const data = this.Lmenu[0].list.find(ele =>{
-				if(ele.name == item.name){
-					return ele
-				}
-			})
-			console.log(data)
-			let timestamp = new Date().getTime() * 1000;
-			let tempItem = JSON.parse(JSON.stringify(data));
-			tempItem.num = `${timestamp}`;
-			console.log(tempItem.data());
-			//console.log(this.$store.state.admin.mobildConfig.defaultArray[item.num]);
-			//console.log(this.$store.state.admin.mobildConfig.defaultArray[item.num])
-		},
 		saveConfig() {
 			let val = this.$store.state.admin.mobildConfig.defaultArray;
 			console.log(JSON.stringify(val), '44444444');
