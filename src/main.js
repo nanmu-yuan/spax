@@ -7,6 +7,10 @@ import store from './store'
 import '../src/assets/css/common.css'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
+
 import axios from 'axios';
 Vue.prototype.$axios = axios
 Vue.use(ElementUI);

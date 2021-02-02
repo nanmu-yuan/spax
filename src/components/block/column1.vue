@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="cbvariant cbvariant-1_column">
+		<div class="cbvariant cbvariant-1_column" v-for="(item,index) of productList" :key="index">
 			<table border="0" cellspacing="0" cellpadding="0" width="100%">
 				<tbody>
 					<tr>
@@ -27,24 +27,10 @@
 																										<span class="image-placeholder" style="">
 
 																											<span class="placeholder-style" style="width: 268px; height: 270px;">
-
+																												<img :src="item.productImg" alt="">
 																												<span class="placeholder-inner">
-
-																													<img class="placeholder-img-large" src="../../assets/imgs/placeholder-img80.png" width="100"><br>
-
-																													<!-- <span class="placeholder-text">Click on image to get more information</span><br> -->
-
+																													<img v-if="list.length==0" class="placeholder-img-large" src="../../assets/imgs/placeholder-img80.png" width="100">
 																												</span>
-																												<span class="placeholder-size">
-																													<span class="placeholder-arrow placeholder-arrow-max">
-																														<img class="placeholder-arrow-left" src="../../assets/imgs/placeholder-img80.png" height="7">
-																													</span>
-																													<span class="placeholder-width-medium">268px</span>
-																													<span class="placeholder-arrow placeholder-arrow-max">
-																														<img class="placeholder-arrow-right" src="../../assets/imgs/placeholder-img80.png" height="7">
-																													</span>
-																												</span>
-
 																											</span>
 																										</span>
 																									</a></td>
@@ -78,23 +64,23 @@
 																		<table border="0" cellpadding="0" cellspacing="0" width="100%">
 																			<tbody>
 																				<tr>
-																					<td class="webfont-fallback-1" style="color:#333333;font-family:Arial, sans-serif;font-size:16px;font-weight:normal;line-height:125%;text-align:center;text-decoration:none;"><a class="webfont-fallback-1" target="_blank" style="color:#333333;font-family:Arial, sans-serif;font-size:16px;font-weight:normal;line-height:125%;text-decoration:none;" href=""><span class="webfont-fallback-1">Product title</span></a></td>
+																					<td class="webfont-fallback-1" style="color:#333333;font-family:Arial, sans-serif;font-size:16px;font-weight:normal;line-height:125%;text-align:center;text-decoration:none;"><a class="webfont-fallback-1" target="_blank" style="color:#333333;font-family:Arial, sans-serif;font-size:16px;font-weight:normal;line-height:125%;text-decoration:none;" href=""><span class="webfont-fallback-1">{{item.productName}}</span></a></td>
 																				</tr>
 																			</tbody>
 																		</table>
 																	</td>
 																</tr>
-																<tr>
+																<!-- <tr>
 																	<td class="webfont-fallback-1" style="color:#999999;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;line-height:157%;padding-top:15px;text-align:center;text-decoration:none;">
 																		<p data-inner-style="description_paragraph" data-title="Description paragraph" data-uneditable-style="margin" style="margin:0;"><a data-inner-style="description_link" data-style-queue="5" data-title="Description link" style="color:#999999;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;line-height:157%;text-decoration:underline;" target="_blank">Enter a text</a>. Use the tools from the toolbox to format it according to your preferences.</p>
 																	</td>
-																</tr>
+																</tr> -->
 																<tr>
 																	<td style="padding-top: 15px;">
 																		<table border="0" cellpadding="0" cellspacing="0" width="100%">
 																			<tbody>
 																				<tr>
-																					<td style="text-align:center;"><span class="webfont-fallback-1" style="color:#333333;font-family:Arial, sans-serif;font-size:20px;font-weight:bold;line-height:110%;text-align:center;text-decoration:none;">$0.00</span><span style="color:#333333;font-family:Arial, sans-serif;font-size:20px;font-weight:bold;line-height:110%;"> / </span><span class="webfont-fallback-1" style="color:#999999;font-family:Arial, sans-serif;font-size:16px;font-weight:normal;line-height:106%;text-decoration:line-through;">$0.00</span></td>
+																					<td style="text-align:center;"><span class="webfont-fallback-1" style="color:#333333;font-family:Arial, sans-serif;font-size:20px;font-weight:bold;line-height:110%;text-align:center;text-decoration:none;">{{item.price}}</span><span style="color:#333333;font-family:Arial, sans-serif;font-size:20px;font-weight:bold;line-height:110%;"> / </span><span class="webfont-fallback-1" style="color:#999999;font-family:Arial, sans-serif;font-size:16px;font-weight:normal;line-height:106%;text-decoration:line-through;">{{item.marketPrice}}</span></td>
 																				</tr>
 																			</tbody>
 																		</table>
@@ -138,10 +124,38 @@
 	</div>
 </template>
 <script>
-    export default{
-        name:"colum1view",
-        props:{
-            
-        }
-    }
+export default {
+	name: 'colum1view',
+	props: {
+		list: {
+			type: Array,
+			default: () => [],
+		},
+	},
+	data() {
+		return {
+			isData: false,
+		};
+	},
+	computed: {
+		productList() {
+			if (this.list.length > 0) {
+				return this.list;
+			} else {
+				return [
+					{
+						productName:
+							'for example product info  list',
+						productUrl:
+							'https://www.berrylook.com/en/Products/short-high-collar-brief-plain-long-sleeve-t-shirt-232100.html',
+						productImg:
+							'../../assets/imgs/placeholder-img80.png',
+						price: '$20.74',
+						marketPrice: '$51.85',
+					},
+				];
+			}
+		},
+	},
+};
 </script>

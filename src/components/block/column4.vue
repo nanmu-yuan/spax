@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="cbvariant cbvariant-4_columns">
+		<div class="cbvariant cbvariant-4_columns" v-for="(item,index) of productList" :key="index">
 			<div class="mobile-product-listing-table" style="display: table; width: 100%;">
 				<div class="mobile-product-listing-row" style="display: table-row;">
 					<!--[if (mso)|(IE)]><table border="0" cellspacing="0" cellpadding="0" width="600" style="width: 600px;"><tr><![endif]-->
@@ -26,25 +26,12 @@
 																							<tbody>
 																								<tr>
 																									<td class="mobile-product-listing-4-image-cell" style="font-size: 0; line-height: 0; text-align: center;"><a target="_blank" href="">
-																											<span class="image-placeholder" style="">
-
+																											<img :src="item[0] && item[0].productImg" width="100%" alt="">
+																											<span class="image-placeholder" style="" v-if="list.length == 0">
 																												<span class="placeholder-style" style="width: 113px; height: 115px;">
-
 																													<span class="placeholder-inner">
-
 																														<img src="../../assets/imgs/placeholder-img80.png" width="40">
-
 																													</span>
-																													<span class="placeholder-size">
-																														<span class="placeholder-arrow placeholder-arrow-large">
-																															<img class="placeholder-arrow-left" src="../../assets/imgs/placeholder-img80.png" height="7">
-																														</span>
-																														<span class="placeholder-width-medium">113px</span>
-																														<span class="placeholder-arrow placeholder-arrow-large">
-																															<img class="placeholder-arrow-right" src="../../assets/imgs/placeholder-img80.png" height="7">
-																														</span>
-																													</span>
-
 																												</span>
 																											</span>
 																										</a></td>
@@ -70,11 +57,6 @@
 																</tr>
 															</tbody>
 														</table>
-													</td>
-												</tr>
-												<tr>
-													<td class="webfont-fallback-1" style="color:#999999;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;line-height:157%;padding-top:15px;text-align:center;text-decoration:none;">
-														<p data-inner-style="description_paragraph" data-title="Description paragraph" data-uneditable-style="margin" style="margin:0;"><a data-inner-style="description_link" data-style-queue="5" data-title="Description link" style="color:#999999;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;line-height:157%;text-decoration:underline;" target="_blank">Enter a text</a>. Use the tools from the toolbox to format it according to your preferences.</p>
 													</td>
 												</tr>
 												<tr>
@@ -117,7 +99,7 @@
 					</div>
 					<!--[if (mso)|(IE)]></td><![endif]-->
 					<!--[if (mso)|(IE)]><td style="width: 20px; vertical-align: top;"><![endif]-->
-					<div class="mobile-product-listing-4-cell mobile-product-listing-4-separator mobile-product-listing-4-1-separator" style="display: table-cell; width: 20px; vertical-align: top;"></div>
+					<div class="mobile-product-listing-4-cell mobile-product-listing-4-separator mobile-product-listing-4-1-separator" style="display: table-cell; width: 19px; vertical-align: top;"></div>
 					<!--[if (mso)|(IE)]></td><![endif]-->
 					<!--[if (mso)|(IE)]><td style="width: 135px; vertical-align: top;"><![endif]-->
 					<div class="mobile-product-listing-4-cell" style="display: table-cell; width: 135px; vertical-align: top;">
@@ -141,25 +123,12 @@
 																							<tbody>
 																								<tr>
 																									<td class="mobile-product-listing-4-image-cell" style="font-size: 0; line-height: 0; text-align: center;"><a target="_blank" href="">
-																											<span class="image-placeholder" style="">
-
+																											<img :src="item[1] && item[1].productImg" width="100%" alt="">
+																											<span class="image-placeholder" style="" v-if="list.length == 0">
 																												<span class="placeholder-style" style="width: 113px; height: 115px;">
-
 																													<span class="placeholder-inner">
-
 																														<img src="../../assets/imgs/placeholder-img80.png" width="40">
-
 																													</span>
-																													<span class="placeholder-size">
-																														<span class="placeholder-arrow placeholder-arrow-large">
-																															<img class="placeholder-arrow-left" src="../../assets/imgs/placeholder-img80.png" height="7">
-																														</span>
-																														<span class="placeholder-width-medium">113px</span>
-																														<span class="placeholder-arrow placeholder-arrow-large">
-																															<img class="placeholder-arrow-right" src="../../assets/imgs/placeholder-img80.png" height="7">
-																														</span>
-																													</span>
-
 																												</span>
 																											</span>
 																										</a></td>
@@ -185,11 +154,6 @@
 																</tr>
 															</tbody>
 														</table>
-													</td>
-												</tr>
-												<tr>
-													<td class="webfont-fallback-1" style="color:#999999;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;line-height:157%;padding-top:15px;text-align:center;text-decoration:none;">
-														<p data-inner-style="description_paragraph" data-title="Description paragraph" data-uneditable-style="margin" style="margin:0;"><a data-inner-style="description_link" data-style-queue="5" data-title="Description link" style="color:#999999;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;line-height:157%;text-decoration:underline;" target="_blank">Enter a text</a>. Use the tools from the toolbox to format it according to your preferences.</p>
 													</td>
 												</tr>
 												<tr>
@@ -232,7 +196,7 @@
 					</div>
 					<!--[if (mso)|(IE)]></td><![endif]-->
 					<!--[if (mso)|(IE)]><td style="width: 20px; vertical-align: top;"><![endif]-->
-					<div class="mobile-product-listing-4-cell mobile-product-listing-4-separator mobile-product-listing-4-2-separator" style="display: table-cell; width: 20px; vertical-align: top;"></div>
+					<div class="mobile-product-listing-4-cell mobile-product-listing-4-separator mobile-product-listing-4-2-separator" style="display: table-cell; width: 19px; vertical-align: top;"></div>
 					<!--[if (mso)|(IE)]></td><![endif]-->
 					<!--[if (mso)|(IE)]><td style="width: 135px; vertical-align: top;"><![endif]-->
 					<div class="mobile-product-listing-4-cell" style="display: table-cell; width: 135px; vertical-align: top;">
@@ -256,25 +220,12 @@
 																							<tbody>
 																								<tr>
 																									<td class="mobile-product-listing-4-image-cell" style="font-size: 0; line-height: 0; text-align: center;"><a target="_blank" href="">
-																											<span class="image-placeholder" style="">
-
+																											<img :src="item[2] && item[2].productImg" width="100%" alt="">
+																											<span class="image-placeholder" style="" v-if="list.length == 0">
 																												<span class="placeholder-style" style="width: 113px; height: 115px;">
-
 																													<span class="placeholder-inner">
-
 																														<img src="../../assets/imgs/placeholder-img80.png" width="40">
-
 																													</span>
-																													<span class="placeholder-size">
-																														<span class="placeholder-arrow placeholder-arrow-large">
-																															<img class="placeholder-arrow-left" src="../../assets/imgs/placeholder-img80.png" height="7">
-																														</span>
-																														<span class="placeholder-width-medium">113px</span>
-																														<span class="placeholder-arrow placeholder-arrow-large">
-																															<img class="placeholder-arrow-right" src="../../assets/imgs/placeholder-img80.png" height="7">
-																														</span>
-																													</span>
-
 																												</span>
 																											</span>
 																										</a></td>
@@ -300,11 +251,6 @@
 																</tr>
 															</tbody>
 														</table>
-													</td>
-												</tr>
-												<tr>
-													<td class="webfont-fallback-1" style="color:#999999;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;line-height:157%;padding-top:15px;text-align:center;text-decoration:none;">
-														<p data-inner-style="description_paragraph" data-title="Description paragraph" data-uneditable-style="margin" style="margin:0;"><a data-inner-style="description_link" data-style-queue="5" data-title="Description link" style="color:#999999;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;line-height:157%;text-decoration:underline;" target="_blank">Enter a text</a>. Use the tools from the toolbox to format it according to your preferences.</p>
 													</td>
 												</tr>
 												<tr>
@@ -347,7 +293,7 @@
 					</div>
 					<!--[if (mso)|(IE)]></td><![endif]-->
 					<!--[if (mso)|(IE)]><td style="width: 20px; vertical-align: top;"><![endif]-->
-					<div class="mobile-product-listing-4-cell mobile-product-listing-4-separator mobile-product-listing-4-3-separator" style="display: table-cell; width: 20px; vertical-align: top;"></div>
+					<div class="mobile-product-listing-4-cell mobile-product-listing-4-separator mobile-product-listing-4-3-separator" style="display: table-cell; width: 19px; vertical-align: top;"></div>
 					<!--[if (mso)|(IE)]></td><![endif]-->
 					<!--[if (mso)|(IE)]><td style="width: 135px; vertical-align: top;"><![endif]-->
 					<div class="mobile-product-listing-4-cell" style="display: table-cell; width: 135px; vertical-align: top;">
@@ -371,25 +317,12 @@
 																							<tbody>
 																								<tr>
 																									<td class="mobile-product-listing-4-image-cell" style="font-size: 0; line-height: 0; text-align: center;"><a target="_blank" href="">
-																											<span class="image-placeholder" style="">
-
+																											<img :src="item[3] && item[3].productImg" width="100%" alt="">
+																											<span class="image-placeholder" style="" v-if="list.length == 0">
 																												<span class="placeholder-style" style="width: 113px; height: 115px;">
-
 																													<span class="placeholder-inner">
-
 																														<img src="../../assets/imgs/placeholder-img80.png" width="40">
-
 																													</span>
-																													<span class="placeholder-size">
-																														<span class="placeholder-arrow placeholder-arrow-large">
-																															<img class="placeholder-arrow-left" src="../../assets/imgs/placeholder-img80.png" height="7">
-																														</span>
-																														<span class="placeholder-width-medium">113px</span>
-																														<span class="placeholder-arrow placeholder-arrow-large">
-																															<img class="placeholder-arrow-right" src="../../assets/imgs/placeholder-img80.png" height="7">
-																														</span>
-																													</span>
-
 																												</span>
 																											</span>
 																										</a></td>
@@ -415,11 +348,6 @@
 																</tr>
 															</tbody>
 														</table>
-													</td>
-												</tr>
-												<tr>
-													<td class="webfont-fallback-1" style="color:#999999;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;line-height:157%;padding-top:15px;text-align:center;text-decoration:none;">
-														<p data-inner-style="description_paragraph" data-title="Description paragraph" data-uneditable-style="margin" style="margin:0;"><a data-inner-style="description_link" data-style-queue="5" data-title="Description link" style="color:#999999;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;line-height:157%;text-decoration:underline;" target="_blank">Enter a text</a>. Use the tools from the toolbox to format it according to your preferences.</p>
 													</td>
 												</tr>
 												<tr>
@@ -468,7 +396,84 @@
 	</div>
 </template>
 <script>
-    export default{
-        name:'column4view'
-    }
+export default {
+	name: 'column4view',
+	props: {
+		list: {
+			type: Array,
+			default() {
+				return [
+					{
+						productName:
+							'Short High Collar Brief Plain Long Sleeve T-Shirt',
+						productUrl:
+							'https://www.berrylook.com/en/Products/short-high-collar-brief-plain-long-sleeve-t-shirt-232100.html',
+						productImg:
+							'https://bl.aopcdn.com/goods/FFA9AA6BA723/3618153_8602d27b73.jpg@!h400-w300',
+						price: '$20.74',
+						marketPrice: '$51.85',
+					},
+				];
+			},
+		},
+	},
+	computed: {
+		productList() {
+			if (this.list.length > 0) {
+				return this.group(this.list, 4);
+			} else {
+				return [
+					[
+						{
+							productName: 'for example product info  list',
+							productUrl:
+								'https://www.berrylook.com/en/Products/short-high-collar-brief-plain-long-sleeve-t-shirt-232100.html',
+							productImg:
+								'../../assets/imgs/placeholder-img80.png',
+							price: '$20.74',
+							marketPrice: '$51.85',
+						},
+						{
+							productName: 'for example product info  list',
+							productUrl:
+								'https://www.berrylook.com/en/Products/short-high-collar-brief-plain-long-sleeve-t-shirt-232100.html',
+							productImg:
+								'../../assets/imgs/placeholder-img80.png',
+							price: '$20.74',
+							marketPrice: '$51.85',
+						},
+						{
+							productName: 'for example product info  list',
+							productUrl:
+								'https://www.berrylook.com/en/Products/short-high-collar-brief-plain-long-sleeve-t-shirt-232100.html',
+							productImg:
+								'../../assets/imgs/placeholder-img80.png',
+							price: '$20.74',
+							marketPrice: '$51.85',
+						},
+						{
+							productName: 'for example product info  list',
+							productUrl:
+								'https://www.berrylook.com/en/Products/short-high-collar-brief-plain-long-sleeve-t-shirt-232100.html',
+							productImg:
+								'../../assets/imgs/placeholder-img80.png',
+							price: '$20.74',
+							marketPrice: '$51.85',
+						},
+					],
+				];
+			}
+		},
+	},
+	methods: {
+		group(array, subGroupLength) {
+			let index = 0;
+			let newArray = [];
+			while (index < array.length) {
+				newArray.push(array.slice(index, (index += subGroupLength)));
+			}
+			return newArray;
+		},
+	},
+};
 </script>

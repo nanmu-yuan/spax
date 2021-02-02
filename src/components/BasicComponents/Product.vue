@@ -8,10 +8,10 @@
 							<tbody>
 								<tr>
 									<td style="padding-bottom:20px;padding-left:20px;padding-right:20px;padding-top:20px;">
-										<colum1view v-if="columns == 1"></colum1view>
-										<colum2view v-if="columns == 2"></colum2view>
-										<colum3view v-if="columns == 3"></colum3view>
-										<colum4view v-if="columns == 4"></colum4view>
+										<colum1view v-if="columns == 1" :list = "list"></colum1view>
+										<colum2view v-if="columns == 2" :list = "list"></colum2view>
+										<colum3view v-if="columns == 3" :list = "list"></colum3view>
+										<colum4view v-if="columns == 4" :list = "list"></colum4view>
 									</td>
 								</tr>
 							</tbody>
@@ -53,6 +53,12 @@ export default {
 			defaultConfig: {
 				name: 'c_product',
 				timestamp: this.num,
+				productContentConfig:{
+					title:'产品数据',
+					value:'',
+				    list: [],
+				
+				},
 				productShowTypeConfig: {
 					title: 'TYPE',
 					value: '1',
@@ -78,6 +84,7 @@ export default {
 			},
 			pageData: {},
 			columns: '1',
+			list:[]
 		};
 	},
 	watch: {
@@ -110,6 +117,7 @@ export default {
 		setConfig(data) {
 			if (!data) return;
 			this.columns = data.productShowTypeConfig.value;
+			this.list = data.productContentConfig.list;
 		},
 	},
 	mounted() {

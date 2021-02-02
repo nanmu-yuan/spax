@@ -1,7 +1,7 @@
 <template>
 	<div>
-		<div class="cbvariant cbvariant-2_columns">
-			<div class="mobile-product-listing-table" style="display: table; width: 100%;">
+		<div class="cbvariant cbvariant-2_columns" v-for="(item,index) of productList" :key="index">
+				<div class="mobile-product-listing-table" style="display: table; width: 100%;">
 				<div class="mobile-product-listing-row" style="display: table-row;">
 					<!--[if (mso)|(IE)]><table border="0" cellspacing="0" cellpadding="0" width="600" style="width: 600px;"><tr><![endif]-->
 					<!--[if (mso)|(IE)]><td style="width: 290px; vertical-align: top;" width="290"><![endif]-->
@@ -26,27 +26,13 @@
 																							<tbody>
 																								<tr>
 																									<td class="mobile-product-listing-2-image-cell" style="font-size: 0; line-height: 0; text-align: center;"><a target="_blank" href="">
-																											<span class="image-placeholder" style="">
-
-																												<span class="placeholder-style" style="width: 268px; height: 270px;">
-
+																										<img :src="item[0].productImg" alt="" width ="100%">
+																											<span class="image-placeholder" style="" v-if="list.length==0">
+																												<span class="placeholder-style" style="width: 268px; height: 270px;" >
 																													<span class="placeholder-inner">
-
-																														<img class="placeholder-img-large" src="../../assets/imgs/placeholder-img80.png" width="100"><br>
-
-																														<!-- <span class="placeholder-text">Click on image to get more information</span><br> -->
+																														<img  class="placeholder-img-large" src="../../assets/imgs/placeholder-img80.png" width="100">
 
 																													</span>
-																													<span class="placeholder-size">
-																														<span class="placeholder-arrow placeholder-arrow-max">
-																															<img class="placeholder-arrow-left" src="../../assets/imgs/placeholder-img80.png" height="7">
-																														</span>
-																														<span class="placeholder-width-medium">268px</span>
-																														<span class="placeholder-arrow placeholder-arrow-max">
-																															<img class="placeholder-arrow-right" src="../../assets/imgs/placeholder-img80.png" height="7">
-																														</span>
-																													</span>
-
 																												</span>
 																											</span>
 																										</a></td>
@@ -120,8 +106,6 @@
 					<!--[if (mso)|(IE)]></td><![endif]-->
 					<!--[if (mso)|(IE)]><td style="width: 20px; vertical-align: top;" width="20"><![endif]-->
 					<div class="mobile-product-listing-2-cell mobile-product-listing-2-separator" style="display: table-cell; width: 20px; vertical-align: top;"></div>
-					<!--[if (mso)|(IE)]></td><![endif]-->
-					<!--[if (mso)|(IE)]><td style="width: 290px; vertical-align: top;" width="290"><![endif]-->
 					<div class="mobile-container" style="display: table-cell; width: 290px; vertical-align: top;">
 						<table border="0" cellspacing="0" cellpadding="0" width="290" style="width:290px;" class="mobile-wide">
 							<tbody>
@@ -143,28 +127,14 @@
 																							<tbody>
 																								<tr>
 																									<td class="mobile-product-listing-2-image-cell" style="font-size: 0; line-height: 0; text-align: center;"><a target="_blank" href="">
-																											<span class="image-placeholder" style="">
-
+																										 <img :src="item[1].productImg" alt="" width="100%">
+																											<span class="image-placeholder" style="" v-if="list.length ==0">
 																												<span class="placeholder-style" style="width: 268px; height: 270px;">
-
-																													<span class="placeholder-inner">
-
-																														<img class="placeholder-img-large" src="../../assets/imgs/placeholder-img80.png" width="100"><br>
-
-																														<!-- <span class="placeholder-text">Click on image to get more information</span><br> -->
-
+																													
+																													<span class="placeholder-inner" >
+																														<img class="placeholder-img-large" src="../../assets/imgs/placeholder-img80.png" width="100">
 																													</span>
-																													<span class="placeholder-size">
-																														<span class="placeholder-arrow placeholder-arrow-max">
-																															<img class="placeholder-arrow-left" src="../../assets/imgs/placeholder-img80.png" height="7">
-																														</span>
-																														<span class="placeholder-width-medium">268px</span>
-																														<span class="placeholder-arrow placeholder-arrow-max">
-																															<img class="placeholder-arrow-right" src="../../assets/imgs/placeholder-img80.png" height="7">
-																														</span>
-																													</span>
-
-																												</span>
+																											</span>
 																											</span>
 																										</a></td>
 																								</tr>
@@ -234,15 +204,56 @@
 							</tbody>
 						</table>
 					</div>
-					<!--[if (mso)|(IE)]></td><![endif]-->
-					<!--[if (mso)|(IE)]></tr></table><![endif]-->
 				</div>
 			</div>
 		</div>
 	</div>
 </template>
 <script>
-    export default{
-        name:"column2view"
-    }
+export default {
+	name: 'column2view',
+	props: {
+		list: {
+			type: Array,
+			default: () => [],
+		},
+	},
+	computed: {
+		productList() {
+			if (this.list.length > 0) {
+				console.log(this.group(this.list, 2),999)
+				return this.group(this.list, 2);
+			} else {
+				return [[
+					{
+						productName: 'for example product info  list',
+						productUrl:
+							'https://www.berrylook.com/en/Products/short-high-collar-brief-plain-long-sleeve-t-shirt-232100.html',
+						productImg: '../../assets/imgs/placeholder-img80.png',
+						price: '$20.74',
+						marketPrice: '$51.85',
+					},
+					{
+						productName: 'for example product info  list',
+						productUrl:
+							'https://www.berrylook.com/en/Products/short-high-collar-brief-plain-long-sleeve-t-shirt-232100.html',
+						productImg: '../../assets/imgs/placeholder-img80.png',
+						price: '$20.74',
+						marketPrice: '$51.85',
+					},
+				]];
+			}
+		},
+	},
+		methods: {
+		group(array, subGroupLength) {
+			let index = 0;
+			let newArray = [];
+			while (index < array.length) {
+				newArray.push(array.slice(index, (index += subGroupLength)));
+			}
+			return newArray;
+		},
+	},
+};
 </script>

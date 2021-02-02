@@ -21,8 +21,8 @@
 import toolCom from '../ItemConfig';
 import { mapState, mapMutations, mapActions } from 'vuex';
 export default {
-	name: 'c_product',
-	componentsName: 'c_product',
+	name: 'c_footer',
+	componentsName: 'c_footer',
 	components: {
 		...toolCom,
 	},
@@ -43,16 +43,12 @@ export default {
 			configObj: {},
 			rComContent: [
 				{
-					components:toolCom.c_product_spu_item,
-					configName:'productContentConfig'
+					components: toolCom.c_edit,
+					configName: 'editConfigText',
 				}
 			],
 			rComStyle: [
-                 {
-					components: toolCom.c_select_item,
-					configName: 'productShowTypeConfig',
-				},
-		
+       
 			],
 		};
 	},
