@@ -7,7 +7,7 @@
 						<table border="0" cellspacing="0" cellpadding="0" width="100%">
 							<tbody>
 								<tr>
-									<td style="padding-left:20px;padding-right:20px;">
+									<td :style="[{paddingLeft:leftPad+'px'},{paddingRight:rightPad+'px'}]">
 										<table border="0" cellspacing="0" cellpadding="0" width="100%">
 											<tbody>
 												<tr>
@@ -19,7 +19,7 @@
 																		<table border="0" cellspacing="0" cellpadding="0" width="100%">
 																			<tbody>
 																				<tr>
-																					<td style="padding-bottom:35px;padding-top:35px;">
+																					<td :style="[{paddingBottom:bottomPad+'px'},{paddingTop:topPad+'px'}]">
 																						<div class="cbvariant cbvariant-1_column_social">
 																							<table border="0" cellpadding="0" cellspacing="0" width="100%">
 																								<tbody>
@@ -29,7 +29,7 @@
 																												<tbody>
 																													<tr>
 																														<td class="webfont-fallback-1 appleFooterLinks" style="color:#333333;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;line-height:114%;text-align:center;text-decoration:none;">
-                                                                                                                           <div v-html="content"></div>
+																															<div v-html="content"></div>
 																														</td>
 																													</tr>
 																												</tbody>
@@ -137,7 +137,7 @@ export default {
 	name: 'FooterInfo',
 	configName: 'c_footer',
 	cname: 'FooterInfo',
-	icon: 'el-icon-bank-card',
+	icon: 'el-icon-s-open',
 	type: '1',
 	props: {
 		index: {
@@ -157,14 +157,36 @@ export default {
 		return {
 			// 默认初始化数据禁止修改
 			defaultConfig: {
-				name: 'c_footer.vue',
+				name: 'c_footer',
 				timestamp: this.num,
 				editConfigText: {
 					title: '文本编辑',
 					value: '',
 				},
-            },
-            content:''
+				positionConfig: [
+					{
+						title: 'LEFT PADDING',
+						value: 20,
+					},
+					{
+						title: 'RIGHT PADDING',
+						value: 20,
+					},
+					{
+						title: 'TOP PADDING',
+						value: 35,
+					},
+					{
+						title: 'BOTTOM PADDING',
+						value: 35,
+					},
+				],
+			},
+			content: '',
+			leftPad:'',
+			rightPad:'',
+			topPad:'',
+			bottomPad:''
 		};
 	},
 	watch: {
@@ -181,6 +203,11 @@ export default {
 				];
 				this.setConfig(data);
 			},
+			/**
+			 * 
+			 * j
+			 * 
+			 */
 			deep: true,
 		},
 		defaultArray: {
@@ -197,6 +224,10 @@ export default {
 		setConfig(data) {
 			if (!data) return;
 			this.content = data.editConfigText.value;
+			this.leftPad = data.positionConfig[0].value;
+			this.rightPad = data.positionConfig[1].value;
+			this.topPad = data.positionConfig[2].value;
+			this.bottomPad = data.positionConfig[3].value;
 		},
 	},
 	mounted() {

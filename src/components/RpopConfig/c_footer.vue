@@ -48,7 +48,10 @@ export default {
 				}
 			],
 			rComStyle: [
-       
+            	{
+					components: toolCom.c_common_input_number,
+					configName: 'positionConfig',
+				},
 			],
 		};
 	},

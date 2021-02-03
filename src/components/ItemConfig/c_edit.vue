@@ -37,8 +37,11 @@ export default {
 			editorOption: {
 				modules: {
 					toolbar: [
-						['bold', 'italic', 'underline', 'strike'], // toggled buttons
+						['bold', 'italic', 'underline', 'strike'],
 						[{ size: fontSizeStyle.whitelist }],
+						[{ 'color': [] }, { 'background': [] }],
+						[{ 'align': [] }],
+						[{ 'font': [] }],
 					],
 				},
 			},
