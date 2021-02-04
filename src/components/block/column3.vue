@@ -129,7 +129,7 @@
 																							<tbody>
 																								<tr>
 																									<td class="mobile-product-listing-3-image-cell" style="font-size: 0; line-height: 0; text-align: center;"><a target="_blank" href="">
-																											<img width="100%" :src="item[1] && item[1].productImg" alt="">
+																											<img width="100%" :src="item[1] && item[1].productImg || defaultImg" alt="">
 																											<span class="image-placeholder" style="" v-if="list.length == 0">
 																												<span class="placeholder-style" style="width: 164px; height: 166px;">
 																													<span class="placeholder-inner">
@@ -231,7 +231,7 @@
 																							<tbody>
 																								<tr>
 																									<td class="mobile-product-listing-3-image-cell" style="font-size: 0; line-height: 0; text-align: center;"><a target="_blank" href="">
-																											<img :src="item[2] && item[2].productImg" width="100%" alt="">
+																											<img :src="item[2] && item[2].productImg|| defaultImg" width="100%" alt="">
 																											<span class="image-placeholder" style="" v-if="list.length == 0">
 																												<span class="placeholder-style" style="width: 164px; height: 166px;">
 																													<span class="placeholder-inner">
@@ -321,6 +321,11 @@ export default {
 			type: Array,
 			default: () => [],
 		},
+	},
+	data () {
+		return {
+			defaultImg:'../../assets/imgs/placeholder-img80.png'		
+		}
 	},
 	computed: {
 		productList() {

@@ -26,7 +26,7 @@
 																							<tbody>
 																								<tr>
 																									<td class="mobile-product-listing-2-image-cell" style="font-size: 0; line-height: 0; text-align: center;"><a target="_blank" href="">
-																										<img :src="item[0].productImg" alt="" width ="100%">
+																										<img :src="item[0]&& item[0].productImg" alt="" width ="100%">
 																											<span class="image-placeholder" style="" v-if="list.length==0">
 																												<span class="placeholder-style" style="width: 268px; height: 270px;" >
 																													<span class="placeholder-inner">
@@ -127,7 +127,7 @@
 																							<tbody>
 																								<tr>
 																									<td class="mobile-product-listing-2-image-cell" style="font-size: 0; line-height: 0; text-align: center;"><a target="_blank" href="">
-																										 <img :src="item[1].productImg" alt="" width="100%">
+																										 <img :src="item[1] && item[1].productImg" alt="" width="100%">
 																											<span class="image-placeholder" style="" v-if="list.length ==0">
 																												<span class="placeholder-style" style="width: 268px; height: 270px;">
 																													

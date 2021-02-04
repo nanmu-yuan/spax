@@ -37,62 +37,6 @@
 																										</td>
 																									</tr>
 																									<tr>
-																										<td style="padding-top: 20px;">
-																											<div>
-																												<div class="mobile-footer-social-table" style="display: table; margin: 0 auto;">
-																													<div class="mobile-footer-social-row" style="display: table-row;">
-																														<!--[if (mso)|(IE)]><table border="0" cellspacing="0" cellpadding="0" align="center" style="margin: 0 auto;"><tr><![endif]-->
-																														<!--[if (mso)|(IE)]><td style="vertical-align: top; "><![endif]-->
-																														<div style="display: table-cell; vertical-align: top;">
-																															<table border="0" cellspacing="0" cellpadding="0">
-																																<tbody>
-																																	<tr>
-																																		<td style="padding: 6px 20px;" class="mobile-footer-social-cell"><a target="_blank" href=""><img alt="" border="0" src="https://static.soundestlink.com/images/social_facebook_s.png" width="25" height="25" style="vertical-align: top;"></a></td>
-																																	</tr>
-																																</tbody>
-																															</table>
-																														</div>
-																														<!--[if (mso)|(IE)]></td><![endif]-->
-																														<!--[if (mso)|(IE)]><td style="vertical-align: top; "><![endif]-->
-																														<div style="display: table-cell; vertical-align: top;">
-																															<table border="0" cellspacing="0" cellpadding="0">
-																																<tbody>
-																																	<tr>
-																																		<td style="padding: 6px 20px;" class="mobile-footer-social-cell"><a target="_blank" href=""><img alt="" border="0" src="https://static.soundestlink.com/images/social_twitter_s.png" width="25" height="25" style="vertical-align: top;"></a></td>
-																																	</tr>
-																																</tbody>
-																															</table>
-																														</div>
-																														<!--[if (mso)|(IE)]></td><![endif]-->
-																														<!--[if (mso)|(IE)]><td style="vertical-align: top; "><![endif]-->
-																														<div style="display: table-cell; vertical-align: top;">
-																															<table border="0" cellspacing="0" cellpadding="0">
-																																<tbody>
-																																	<tr>
-																																		<td style="padding: 6px 20px;" class="mobile-footer-social-cell"><a target="_blank" href=""><img alt="" border="0" src="https://static.soundestlink.com/images/social_pinterest_s.png" width="25" height="25" style="vertical-align: top;"></a></td>
-																																	</tr>
-																																</tbody>
-																															</table>
-																														</div>
-																														<!--[if (mso)|(IE)]></td><![endif]-->
-																														<!--[if (mso)|(IE)]><td style="vertical-align: top; "><![endif]-->
-																														<div style="display: table-cell; vertical-align: top;">
-																															<table border="0" cellspacing="0" cellpadding="0">
-																																<tbody>
-																																	<tr>
-																																		<td style="padding: 6px 20px;" class="mobile-footer-social-cell"><a target="_blank" href=""><img alt="" border="0" src="https://static.soundestlink.com/images/social_instagram_s.png" width="25" height="25" style="vertical-align: top;"></a></td>
-																																	</tr>
-																																</tbody>
-																															</table>
-																														</div>
-																														<!--[if (mso)|(IE)]></td><![endif]-->
-																														<!--[if (mso)|(IE)]></tr></table><![endif]-->
-																													</div>
-																												</div>
-																											</div>
-																										</td>
-																									</tr>
-																									<tr>
 																										<td style="color:#999999;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;line-height:114%;padding-top:20px;text-align:center;text-decoration:none;">
 																											<table border="0" cellpadding="0" cellspacing="0" width="100%" style="color:#999999;font-size:14px;line-height:114%;font-family:Arial, sans-serif;font-weight:normal;text-decoration:none;text-align:center;">
 																												<tbody>

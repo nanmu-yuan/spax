@@ -1,32 +1,15 @@
 <template>
 	<div class="home-container">
 		<el-row>
-			<el-col :span="5">
+			<!-- <el-col :span="5">
 				<div class="grid-content bg-purple">
-					<div class="l-menu-container">
-						<div class="Lmenu">
-							<div class="warp">
-								<div style="padding:10px;text-align:center">组件库</div>
-								<div v-for="(item,index) of Lmenu" :key="index">
-									<draggable :list="item.list" class="dragArea list-group" chosenClass="chosen" :options="{group:{name: 'people',pull:'clone', put: false},sort: false}" :clone="cloneDog" @change="log">
-										<div class="list-group-item " v-for="(element,index) of item.list" :key='index' @click="addDom(element,index)">
-											<span class="icon" :class="element.icon"></span>
-											{{element.name}}
-										</div>
-									</draggable>
-								</div>
-								<div>
-									<el-button type="primary" @click="saveConfig"><span>保存</span></el-button>
-								</div>
-							</div>
-						</div>
-					</div>
+		
 				</div>
-			</el-col>
-			<el-col :span="12">
+			</el-col> -->
+			<el-col :span="18">
 				<div class="grid-content bg-purple-light">
 					<div class="mid-warp">
-						<table width="650px" border="0" cellpadding="0" cellspacing="0" align="center" style="width: 650px; margin: 0px auto;">
+						<table ref="template" width="650px" border="0" cellpadding="0" cellspacing="0" align="center" style="width: 650px; margin: 0px auto;">
 							<tbody>
 								<tr>
 									<td bgcolor="#fff" style="background:#fff">
@@ -62,14 +45,29 @@
 					</div>
 				</div>
 			</el-col>
-			<el-col :span="7">
+			<el-col :span="6">
 				<div class="grid-content bg-purple-light">
 					<div class="r-pop-container">
+						<div>
+							<div style="padding:10px;text-align:center">组件库</div>
+							<div v-for="(item,index) of Lmenu" :key="index">
+								<draggable :list="item.list" class="dragArea list-group" chosenClass="chosen" :options="{group:{name: 'people',pull:'clone', put: false},sort: false}" :clone="cloneDog" @change="log">
+									<div class="list-group-item " v-for="(element,index) of item.list" :key='index' @click="addDom(element,index)">
+										<span class="icon" :class="element.icon"></span>
+										{{element.name}}
+									</div>
+								</draggable>
+							</div>
+						</div>
 						<div class="right-box">
 							<div v-for="(item,key) in rConfig" :key="key">
 								<div class="title-bar">{{item.cname}}</div>
 								<component :is="item.configName" :activeIndex="activeIndex" :num="item.num" :index="key"></component>
 							</div>
+						</div>
+						<div class="menu-container">
+							<el-button type="primary" @click="saveConfig"><span>保存</span></el-button>
+							<el-button type="primary" @click="tempSubmit"><span>生成</span></el-button>
 						</div>
 					</div>
 				</div>
@@ -107,6 +105,9 @@ export default {
 		this.arraySort();
 	},
 	methods: {
+		tempSubmit() {
+			console.log(this.$refs.template);
+		},
 		objToArry(data) {
 			let obj = Object.keys(data);
 			let m = obj.map((key) => data[key]);
@@ -204,7 +205,7 @@ export default {
 		},
 		// 获取默认配置
 		getDefaultConfig() {
-			const data =JSON.parse(window.localStorage.getItem('template'));
+			const data = JSON.parse(window.localStorage.getItem('template'));
 			let obj = {};
 			let tempARR = [];
 			let newArr = this.objToArry(data);
@@ -274,7 +275,6 @@ export default {
 .dragArea.list-group {
 	display: flex;
 	flex-wrap: wrap;
-	min-height: 600px;
 	align-content: flex-start;
 	padding: 10px 30px;
 
@@ -415,7 +415,6 @@ export default {
 	.right-box {
 		border: 1px solid #ddd;
 		border-radius: 4px;
-		height: 100%;
 		padding: 0 20px;
 
 		.title-bar {
@@ -426,6 +425,16 @@ export default {
 			border-radius: 4px;
 			border-bottom: 1px solid #eee;
 		}
+	}
+	.menu-container{
+		position: fixed;
+		bottom: 0px;
+		text-align: center;
+		width: 480px;
+		background: #E4E7ED;
+		height: 80px;
+		padding-top: 20px;
+		opacity: 0.8;
 	}
 }
 .chosen {
