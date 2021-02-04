@@ -42,7 +42,7 @@ import { mapState } from 'vuex';
 export default {
 	name: 'cusbutton',
 	configName: 'c_cusbutton',
-	cname: 'Cusbutton',
+	cname: 'button',
 	icon: 'el-icon-switch-button',
 	type: '1',
 	props: {

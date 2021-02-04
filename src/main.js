@@ -11,6 +11,7 @@ import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
 
+import $ from 'jquery'
 import axios from 'axios';
 Vue.prototype.$axios = axios
 Vue.use(ElementUI);

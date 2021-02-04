@@ -47,7 +47,8 @@ export default {
 	},
 	methods: {
 		handleAvatarSuccess(res, file) {
-			this.configData.value = URL.createObjectURL(file.raw);
+			console.log(file)
+			this.configData.value = file.response.data.img;
 		},
 	},
 };

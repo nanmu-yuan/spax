@@ -80,7 +80,7 @@ import { mapState } from 'vuex';
 export default {
 	name: 'FooterInfo',
 	configName: 'c_footer',
-	cname: 'FooterInfo',
+	cname: 'footer',
 	icon: 'el-icon-s-open',
 	type: '1',
 	props: {

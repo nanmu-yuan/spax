@@ -55,7 +55,8 @@ export default {
 			this.$emit('createData', this.from);
         },
         handleAvatarSuccess(res, file) {
-			this.from.productImg = URL.createObjectURL(file.raw);
+			this.from.productImg = file.response.data.img;
+			//this.from.productImg = file.response.data.img;
 		},
 	},
 };

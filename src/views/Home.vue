@@ -8,18 +8,18 @@
 			</el-col> -->
 			<el-col :span="18">
 				<div class="grid-content bg-purple-light">
-					<div class="mid-warp">
-						<table ref="template" width="650px" border="0" cellpadding="0" cellspacing="0" align="center" style="width: 650px; margin: 0px auto;">
+					<div class="mid-warp" ref="template">
+						<table width="650px" border="0" cellpadding="0" cellspacing="0" align="center" style="width: 650px; margin: 0px auto;">
 							<tbody>
 								<tr>
-									<td bgcolor="#fff" style="background:#fff">
+									<td bgcolor="#fff">
 										<div class="Mpage">
-											<draggable class="drag-Mpage" group="people" :list="mConfig" @change="log" ghostClass="ghost">
+											<draggable class="drag-Mpage" group="people" :list="mConfig" @change="log" ghostClass="ghost" >
 												<div class="mConfig-item" v-for="(item,key) in mConfig" :key="key" @click="bingConfig(item,key)">
 													<div class="content-block-template">
 														<component :is="item.name" ref="getComponentData" :configData="propsObj" :index="key" :styleType="styleType" :num="item.num"></component>
 													</div>
-													<div class="content-block-overlay">
+													<div class="content-block-overlay" v-if="iStemplate">
 														<div class="overlay-background"></div>
 														<div :class="{'overlay-edited':activeIndex == key}">
 															<div class="overlay-edited-background"></div>
@@ -54,7 +54,7 @@
 								<draggable :list="item.list" class="dragArea list-group" chosenClass="chosen" :options="{group:{name: 'people',pull:'clone', put: false},sort: false}" :clone="cloneDog" @change="log">
 									<div class="list-group-item " v-for="(element,index) of item.list" :key='index' @click="addDom(element,index)">
 										<span class="icon" :class="element.icon"></span>
-										{{element.name}}
+										{{element.cname}}
 									</div>
 								</draggable>
 							</div>
@@ -66,8 +66,11 @@
 							</div>
 						</div>
 						<div class="menu-container">
-							<el-button type="primary" @click="saveConfig"><span>保存</span></el-button>
-							<el-button type="primary" @click="tempSubmit"><span>生成</span></el-button>
+							<div class="menu-btn">
+								<el-button type="primary" @click="saveConfig"><span>保存</span></el-button>
+								<el-button type="primary" @click="tempSubmit"><span>生成</span></el-button>
+							</div>
+
 						</div>
 					</div>
 				</div>
@@ -79,6 +82,7 @@
 import vuedraggable from 'vuedraggable';
 import MenuConfig from '../components/BasicComponents';
 import RpopConfig from '../components/RpopConfig';
+import base from '../components/block/baseTemplate'
 import Vue from 'vue';
 
 export default {
@@ -93,6 +97,7 @@ export default {
 			activeIndex: -99, // 选中的下标,
 			styleType: 'justify',
 			num: 0,
+			iStemplate: true,
 		};
 	},
 	components: {
@@ -106,7 +111,16 @@ export default {
 	},
 	methods: {
 		tempSubmit() {
-			console.log(this.$refs.template);
+			this.iStemplate = false;
+			setTimeout(() => {
+				let copytep = $(this.$refs.template);
+				let data = copytep.remove('.content-block-overlay');
+				//console.log(data.html());
+				//let str = copytep.find(".Mpage").append(data)
+				let strData = copytep.html().replace(/data-v-(\w)*=""/g, '');
+				console.log(`${base.templateHeader+strData+base.templateFooter}`);
+				this.iStemplate = true;
+			}, 500);
 		},
 		objToArry(data) {
 			let obj = Object.keys(data);
@@ -413,8 +427,8 @@ export default {
 	height: 100vh;
 
 	.right-box {
-		border: 1px solid #ddd;
-		border-radius: 4px;
+		border: 2px solid #ddd;
+		border-radius: 2px;
 		padding: 0 20px;
 
 		.title-bar {
@@ -426,15 +440,20 @@ export default {
 			border-bottom: 1px solid #eee;
 		}
 	}
-	.menu-container{
-		position: fixed;
+	.menu-container {
+		position: absolute;
 		bottom: 0px;
 		text-align: center;
 		width: 480px;
-		background: #E4E7ED;
-		height: 80px;
-		padding-top: 20px;
-		opacity: 0.8;
+		.menu-btn {
+			height: 80px;
+			position: relative;
+			background: #e4e7ed;
+			padding-top: 20px;
+		}
+		&:hover {
+			display: block;
+		}
 	}
 }
 .chosen {
