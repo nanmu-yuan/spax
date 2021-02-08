@@ -6,7 +6,7 @@
 		
 				</div>
 			</el-col> -->
-			<el-col :span="18">
+			<el-col :span="17">
 				<div class="grid-content bg-purple-light">
 					<div class="mid-warp" ref="template">
 						<table width="650px" border="0" cellpadding="0" cellspacing="0" align="center" style="width: 650px; margin: 0px auto;">
@@ -45,7 +45,7 @@
 					</div>
 				</div>
 			</el-col>
-			<el-col :span="6">
+			<el-col :span="7">
 				<div class="grid-content bg-purple-light">
 					<div class="r-pop-container">
 						<div>
@@ -441,12 +441,12 @@ export default {
 		}
 	}
 	.menu-container {
-		position: absolute;
+		position: fixed;
 		bottom: 0px;
 		text-align: center;
-		width: 480px;
+		width: 560px;
 		.menu-btn {
-			height: 80px;
+			height: 50px;
 			position: relative;
 			background: #e4e7ed;
 			padding-top: 20px;

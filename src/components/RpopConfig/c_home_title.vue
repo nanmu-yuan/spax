@@ -48,14 +48,14 @@ export default {
 				},
 				{
 					components: toolCom.c_input_item,
-					configName: 'RConfigText',
-				},
-				{
-					components: toolCom.c_input_item,
 					configName: 'linkConfig',
 				},
 			],
 			rComStyle: [
+				{
+					components: toolCom.c_select_item,
+					configName: 'typeConfig',
+				},
 				{
 					components: toolCom.c_color,
 					configName: 'BgColorConfig',

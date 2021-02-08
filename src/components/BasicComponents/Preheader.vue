@@ -1,16 +1,15 @@
 <template>
 	<div class="Preheader" style="width:650px" :style="{marginTop:mTOP+'px'}">
-		<div  class="header-justify">
+		<div class="header-justify">
 			<table border="0" cellspacing="0" cellpadding="0" width="100%" :style="[{'backgroundColor':bgColor},{'backgroundImage':'url('+bgImgUrl+')'}]" :bgcolor="bgColor">
 				<tbody>
 					<tr>
-						<td style="padding-bottom:15px;padding-left:20px;padding-right:20px;padding-top:15px;">
+						<td :style="[{paddingBottom:'15px'},{paddingLeft:'20px'},{paddingRight:'20px'},{paddingTop:'15px'}]">
 							<table border="0" cellspacing="0" cellpadding="0" width="100%">
 								<tbody>
 									<tr>
-										<td :style="[{'color':textColor},{'fontSize':fontSize+'px'},{'textAlign':txtPosition}]"><span>{{LtitleTxt}}</span></td>
-										<td style="text-align:right">
-											<a target="_blank" :href="link" :style="[{'color':textColor},{'fontSize':fontSize+'px'},{'fontWeight':'normal'},{'textDecoration':'underline'}]"><span>{{RtitleTxt}}</span></a>
+										<td :style="[{'color':textColor},{'fontSize':fontSize+'px'},{'textAlign':txtPosition}]"><span>{{LtitleTxt}}</span>
+											<a target="_blank" href="" style="color:#cc3366;font-family:Arial, sans-serif;font-size:13px;font-weight:normal;line-height:115%;text-decoration:none;"><span>click here</span></a>
 										</td>
 									</tr>
 								</tbody>
@@ -37,9 +36,9 @@ export default {
 		num: {
 			type: null,
 		},
-		styleType:{
-			type:String
-		}
+		styleType: {
+			type: String,
+		},
 	},
 	computed: {
 		...mapState('admin/mobildConfig', ['defaultArray']),
@@ -51,14 +50,27 @@ export default {
 				name: 'c_home_title',
 				timestamp: this.num,
 				LConfigText: {
-					title: '左边文本',
+					title: '文本',
 					value: 'If you cannot see images, please',
 					max: 100,
 				},
-				RConfigText: {
-					title: '右边文本',
-					value: 'If you cannot see images, please',
-					max: 100,
+				typeConfig: {
+					title: '显示类型',
+					options: [
+						{
+							value: 'left',
+							label: 'left',
+						},
+						{
+							value: 'right',
+							label: 'right',
+						},
+						{
+							value: 'center',
+							label: 'center',
+						},
+					],
+					value: 'center',
 				},
 				linkConfig: {
 					title: '链接',
@@ -81,22 +93,20 @@ export default {
 					title: '字体大小',
 					value: 12,
 				},
-				BgImgConfig:{
-					title:'背景图',
-					value:''
-				}
+				BgImgConfig: {
+					title: '背景图',
+					value: '',
+				},
 			},
 			LtitleTxt: '',
-			RtitleTxt: '',
-			link: '',
 			txtPosition: '',
 			txtStyle: '',
 			fontSize: '',
 			textColor: '#000000',
-			mTOP: 0,
+			mTOP: '',
 			pageData: {},
 			bgColor: '',
-			bgImgUrl:''
+			bgImgUrl: '',
 		};
 	},
 	watch: {
@@ -129,13 +139,10 @@ export default {
 		setConfig(data) {
 			if (!data) return;
 			this.LtitleTxt = data.LConfigText.value;
-			this.RtitleTxt = data.RConfigText.value;
 			this.link = data.linkConfig.value;
 			this.bgColor = data.BgColorConfig.value;
 			this.textColor = data.fontColorConfig.value;
-			// this.txtPosition =
-			// 	data.textPosition.list[data.textPosition.type].style;
-			// this.txtStyle = data.textStyle.list[data.textStyle.type].style;
+			this.txtPosition = data.typeConfig.value;
 			this.fontSize = data.fontSizeConfig.value;
 			this.mTOP = data.positionConfig.value;
 			this.bgImgUrl = data.BgImgConfig.value;
